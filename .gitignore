@@ -74,3 +74,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Datos de acceso a BBDD:
+conexion.php
+# Sincro FTP
+.remote-sync.json
