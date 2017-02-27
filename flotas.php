@@ -127,7 +127,7 @@ require_once 'autenticacion.php';
                                 ?>
                             </select>
                         </div>
-                        <div class="text-center col-md-6 btn-group" aria-label="...">
+                        <div class="text-center col-md-4 btn-group" aria-label="...">
                             <?php
                             $clase = "btn btn-default";
                             if ($pagina == 1){
@@ -171,9 +171,12 @@ require_once 'autenticacion.php';
                                 &nbsp; <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span> &nbsp;
                             </button>
                         </div>
-                        <div class="btn-group col-md-3" role="group" aria-label="...">
+                        <div class="btn-group col-md-4" role="group" aria-label="...">
                             <a href="flotas_agregar.php" title="<?php echo $txtaddflota;?>" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <?php echo $txtaddflo;?>
+                            </a>
+                            <a href="flotas.php" title="<?php echo $txtnewtab;?>" class="btn btn-default" target="_blank">
+                                <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> <?php echo $txtampliar;?>
                             </a>
                             <button type="button" class="btn btn-default" id="xlsflotas" title="<?php echo $txtexcel;?>">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Excel
