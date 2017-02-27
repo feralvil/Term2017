@@ -1,27 +1,4 @@
 <?php
-// Select de Organizaciones
-$sql_organiza = "SELECT ID, ORGANIZACION FROM organizaciones ORDER BY organizaciones.ORGANIZACION ASC";
-$res_organiza = mysqli_query($link, $sql_organiza) or die($errsqlorg . ": " . mysqli_error($link));
-$norganiza = mysqli_num_rows($res_organiza);
-// Construimos el Select de Organizaciones:
-while ($orgsql = mysqli_fetch_assoc($res_organiza)){
-    $selorganiza[] = array('ID' => $orgsql['ID'], 'ORGANIZACION' => $orgsql['ORGANIZACION']);
-}
-
-// Select de Flotas
-$sql_selflotas = "SELECT ID, FLOTA FROM flotas WHERE 1";
-if ((isset($_POST['idorg']))&&($_POST['idorg'] > 0)){
-    $sql_selflotas .=  " AND (flotas.ORGANIZACION = " . $_POST['idorg'] .")";
-}
-$sql_selflotas .= " ORDER BY flotas.FLOTA ASC";
-$res_selflotas = mysqli_query($link, $sql_selflotas) or die($errsqlselflo . ": " . mysqli_error($link));
-$nselflotas = mysqli_num_rows($res_selflotas);
-// Construimos el Select de Flotas:
-$selflotas = array();
-while ($flotasel = mysqli_fetch_assoc($res_selflotas)){
-    $selflotas[] = array('ID' => $flotasel['ID'], 'FLOTA' => $flotasel['FLOTA']);
-}
-
 // Fijamos la Flota si es un usuario restringido o si se ha elegido una
 $idflota = 0;
 if ($permiso < 2){
@@ -32,34 +9,34 @@ else{
         $idflota = $_POST['idflota'];
     }
 }
+
 // Consulta de tabla de flotas (limitada)
 $sql_flotas = "SELECT flotas.ID, flotas.FLOTA, flotas.ACRONIMO, organizaciones.ORGANIZACION, flotas.ENCRIPTACION";
 $sql_flotas .= " FROM flotas, organizaciones WHERE (flotas.ORGANIZACION = organizaciones.ID)";
 if ((isset($_POST['idorg']))&&($_POST['idorg'] > 0)){
     $sql_flotas .=  " AND (flotas.ORGANIZACION = " . $_POST['idorg'] .")";
+    $sql_org = "SELECT * FROM organizaciones WHERE ID = " . $_POST['idorg'];
+    $res_org = mysqli_query($link, $sql_org) or die($errsqlorg . mysqli_error($link));
+    $norg = mysqli_num_rows($res_org);
+    if ($norg > 0){
+        $selorg = mysqli_fetch_assoc($res_org);
+        mysqli_free_result($res_org);
+    }
 }
 if ($idflota > 0){
-    $sql_flotas .=  " AND (flotas.ID = " . $_POST['idflota'] .")";
+    $sql_flotas .=  " AND (flotas.ID = " . $idflota .")";
+    $sql_flota = "SELECT * FROM flotas WHERE ID = $idflota";
+    $res_flota = mysqli_query($link, $sql_flota) or die($errsqlflotas . mysqli_error($link));
+    $nflotas = mysqli_num_rows($res_flota);
+    if ($nflotas > 0){
+        $selflota = mysqli_fetch_assoc($res_flota);
+        mysqli_free_result($res_flota);
+    }
 }
 if ((isset($_POST['formcont']))&&($_POST['formcont'] != "")){
     $sql_flotas .=  " AND (flotas.FORMCONT = '" . $_POST['formcont'] ."')";
 }
 $sql_flotas .= " ORDER BY organizaciones.ORGANIZACION ASC, flotas.FLOTA ASC";
-$res_flotas = mysqli_query($link, $sql_flotas) or die($errsqlflotas . mysqli_error($link));
-$nsinpag = mysqli_num_rows($res_flotas);
-// Páginación
-$pagina = 1;
-if (isset($_POST['pagina'])){
-    $pagina = $_POST['pagina'];
-}
-$tampagina = 30;
-if (isset($_POST['tampagina'])){
-    $tampagina = $_POST['tampagina'];
-}
-// Nº total de páginas:
-$npaginas = ceil($nsinpag / $tampagina);
-$inicio = ($pagina - 1) * $tampagina;
-$sql_flotas .= " LIMIT ".$inicio.",". $tampagina;
 $res_flotas = mysqli_query($link, $sql_flotas) or die($errsqlflotas . mysqli_error($link));
 $nflotas = mysqli_num_rows($res_flotas);
 $flotas = array();
@@ -87,8 +64,6 @@ while ($sqlflota = mysqli_fetch_assoc($res_flotas)){
         'NDESP' => $nterm[4]
     );
 }
-mysqli_free_result($res_organiza);
-mysqli_free_result($res_selflotas);
 mysqli_free_result($res_flotas);
 mysqli_close($link);
 ?>
