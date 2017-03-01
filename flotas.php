@@ -47,7 +47,7 @@ require_once 'autenticacion.php';
         <h1><?php echo $h1; ?></h1>
         <?php
         if ($permiso > 1){
-            require_once 'sql_flotas.php';
+            require_once 'sql/flotas.php';
             $nflotas = count($flotas);
         ?>
             <form name="formflotas" id="formflotas" method="post" value="flotas.php" class="form-horizontal">

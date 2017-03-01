@@ -54,7 +54,7 @@ require_once 'autenticacion.php';
     <div class="container-fluid">
         <?php
         if ($permiso > 0){
-            require_once 'sql_flotasdet.php';
+            require_once 'sql/flotas_detalle.php';
         ?>
             <h1><?php echo $h1; ?> <?php echo $flota['FLOTA'];?></h1>
                 <form name="formflotas" id="formflotas" method="post" value="flota_detalle.php" class="form-horizontal">

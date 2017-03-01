@@ -80,7 +80,7 @@ if ($flota_usu == 100) {
 
 if ($permiso > 1){
     // Consultas a la BBDD
-    require_once 'sql_flotasexp.php';
+    require_once 'sql/flotas_exportar.php';
 
     // Tamaño de papel (A4) y orientación (Apaisado)
     $objPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
