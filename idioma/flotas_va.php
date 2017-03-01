@@ -1,6 +1,6 @@
 <?php
 /*
-Fichero de idiomas 'ES' para flotas.php
+Fichero de idiomas 'VA' para flotas.php
 */
 $titulo = "Flotes de la Xarxa COMDES";
 $h1 = "Flotes de la Xarxa COMDES";
@@ -28,7 +28,7 @@ $txtpagult = "Última pàgina";
 $txtaddflota = "Nova flota";
 $txtaddflo = "Nova";
 $txtexcel = "Exportar a Excel";
-$txtexcel = "Exportar a PDF";
+$txtpdf = "Exportar a PDF";
 $txtampliar = "Pestanya";
 $txtnewtab = "Obrir en nova pestanya";
 $txtdetflota = "Detall de Flota";
