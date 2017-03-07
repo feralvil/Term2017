@@ -17,7 +17,7 @@ $(function(){
     });
     // Botón Exportar a PDF:
     $("button#botpdf").click(function(){
-        $("form#actionflota").attr('action', 'flotas_pdfdet.php');
+        $("form#actionflota").attr('action', 'flotas_detpdf.php');
         $("form#actionflota").attr('target', '_blank');
         $("form#actionflota").submit();
         $("form#actionflota").attr('target', '_self');
@@ -25,7 +25,7 @@ $(function(){
    });
    // Botón Exportar a Excel:
    $("button#botexcel").click(function(){
-       $("form#actionflota").attr('action', 'flotas_excdet.php');
+       $("form#actionflota").attr('action', 'flotas_detexcel.php');
        $("form#actionflota").attr('target', '_blank');
        $("form#actionflota").submit();
        $("form#actionflota").attr('target', '_self');
