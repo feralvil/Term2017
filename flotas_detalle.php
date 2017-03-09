@@ -110,6 +110,26 @@ require_once 'autenticacion.php';
                 <form name="formorg" id="formorg" action="organizaciones_detalle.php" method="post">
                     <input type="hidden" name="idorg" id="idorg" value="<?php echo $flota['ORGANIZACION'];?>" />
                 </form>
+                <?php
+                if (isset($_POST['update'])){
+                    if ($_POST['update'] == 'OK'){
+                        $alert = 'alert-success';
+                        $span = 'glyphicon-ok';
+                    }
+                    else{
+                        $alert = 'alert-warning';
+                        $span = 'glyphicon-alert';
+                    }
+                ?>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 alert alert-dismissible <?php echo $alert;?>">
+                            <span class="glyphicon <?php echo $span;?>" aria-hidden="true"></span> &mdash; <?php echo $_POST['mensflash'];?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                    </div>
+                <?php
+                }
+                ?>
                 <div id="principal">
                     <ul class="nav nav-tabs">
                         <li role="presentation" class="active">
