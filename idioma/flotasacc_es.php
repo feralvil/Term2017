@@ -7,6 +7,7 @@ $titulo = "Acceso Flota de la Red COMDES";
 $h1 = "Contraseña de la Flota";
 $h2acceso = "Datos de acceso";
 $txtuser = "Usuario";
+$errsqlflota = "Error en la consulta de flota";
 $txtpassword = "Nueva contraseña";
 $txtpassconf = "Confirmar contraseña";
 $botatras = "Volver a flota";

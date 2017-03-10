@@ -76,6 +76,42 @@ if (isset($_POST['origen'])){
                     $res_update = mysqli_query($link, $sql_acceso) or die($errsqlacceso . ': ' . mysqli_error($link));
                 }
             }
+            if ($origen == "editar"){
+                $h1 = $h1editar;
+                $enlaceok = 'flotas_detalle.php';
+                $enlacefail = 'flotas_editar.php';
+                $mensok = $menseditar;
+                $error = $erreditar;
+                // Validaciones
+                $res_update = true;
+                if ($_POST['flota'] == ""){
+                    $res_update = false;
+                    $error .= ': ' . $errflotavac;
+                }
+                if (($res_update) && ($_POST['acronimo'] == "")){
+                    $res_update = false;
+                    $error .= ': ' . $erracrovac;
+                }
+                // Comprobamos si la flota o el acrónimo están repetidos
+                if ($res_update){
+                    $sql_check = 'SELECT * FROM FLOTAS WHERE ((FLOTA = "' . $_POST['flota'] . '") OR (ACRONIMO = "' . $_POST['acronimo'] . '")) AND ID <> ' . $idflota;
+                    $res_check = mysqli_query($link, $sql_check) or die($errsqlcheck . ': ' . $sql_check . '<br/>' . mysqli_error($link));
+                    $ncheck = mysqli_num_rows($res_check);
+                    if ($ncheck > 0){
+                        $res_update = false;
+                        $error .= ': ' . $erredirep;
+                    }
+                }
+                if ($res_update){
+                    $sql_editar = 'UPDATE FLOTAS SET FLOTA = "' . $_POST['flota'] . '", ACRONIMO = "' . $_POST['acronimo'] . '",';
+                    $sql_editar .= ' ORGANIZACION = "' . $_POST['organiza'] . '", INE = "' . $_POST['ciudad'] . '",';
+                    $sql_editar .= ' DOMICILIO = "' . $_POST['domicilio'] . '", CP = "' . $_POST['cp'] . '",';
+                    $sql_editar .= ' ACTIVO = "' . $_POST['activo'] . '", ENCRIPTACION = "' . $_POST['encripta'] . '",';
+                    $sql_editar .= ' RANGO = "' . $_POST['rangoini'] . '-' . $_POST['rangofin'] . '"';
+                    $sql_editar .= ' WHERE ID = ' . $idflota;
+                    $res_update = mysqli_query($link, $sql_editar) or die($errsqleditar . ': ' . mysqli_error($link));
+                }
+            }
         }
         else{
             if ($idflota > 0){

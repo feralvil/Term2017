@@ -9,6 +9,7 @@ $h2acceso = "Dades d'accés";
 $txtuser = "Usuari";
 $txtpassword = "Nova contrasenya";
 $txtpassconf = "Confirmar contrasenya";
+$errsqlflota = "Error en la consulta de flota";
 $botatras = "Tornar a flota";
 $botguardar = "Guardar canvis";
 $botcancel = "Cancel·lar canvis";
