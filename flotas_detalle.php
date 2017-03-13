@@ -314,7 +314,7 @@ require_once 'autenticacion.php';
                                 else {
                                 ?>
                                     <p class="bg-warning">
-                                        <span class="glyphicon glyphicon-alert" aria-hidden="true"></span><?php echo $errores[$indice];?>
+                                        <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> <?php echo $errores[$indice];?>
                                     </p>
                         <?php
                                 }
