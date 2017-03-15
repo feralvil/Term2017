@@ -51,12 +51,18 @@ require_once 'autenticacion.php';
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            <?php require_once 'cabecera.php'; ?>
+        </div>
         <?php
         if ($permiso > 0){
             require_once 'sql/flotas_acceso.php';
             if ($nflota > 0){
         ?>
                 <h1><?php echo $h1; ?> <?php echo $flota['FLOTA'];?></h1>
+                <form name="formidioma" id="formidioma" method="post" action="flotas_acceso.php">
+                    <input type="hidden" name="idflota" id="idflota" value="<?php echo $idflota;?>" />
+                </form>
                 <form name="formacceso" id="formacceso" method="post" action="flotas_update.php">
                     <input type="hidden" name="idflota" id="idflota" value="<?php echo $idflota;?>" />
                     <input type="hidden" name="origen" id="origen" value="acceso" />

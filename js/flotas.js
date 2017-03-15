@@ -54,4 +54,16 @@ $(function(){
         $("input#idflota").val(idflota);
         $("form#detalle").submit();
     });
+    //Cambio de idioma - VA:
+    $("a#valencia").click(function(){
+        // Modificamos la cookie de idioma:
+        document.cookie = "idioma=va";
+        $("form#formflotas").submit();
+    });
+    //Cambio de idioma - ES:
+    $("a#castellano").click(function(){
+        // Modificamos la cookie de idioma:
+        document.cookie = "idioma=es";
+        $("form#formflotas").submit();
+    });
 });

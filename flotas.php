@@ -44,6 +44,9 @@ require_once 'autenticacion.php';
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            <?php require_once 'cabecera.php'; ?>
+        </div>
         <h1><?php echo $h1; ?></h1>
         <?php
         if ($permiso > 1){

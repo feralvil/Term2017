@@ -22,7 +22,7 @@ require_once 'autenticacion.php';
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <!-- Funciones jQuery -->
-    <script type="text/javascript" src="js/flotas_acceso.js"></script>
+    <script type="text/javascript" src="js/flotas_editar.js"></script>
 
     <?php
     // Permisos de Usuario:
@@ -51,12 +51,18 @@ require_once 'autenticacion.php';
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            <?php require_once 'cabecera.php'; ?>
+        </div>
         <?php
         if ($permiso > 0){
             require_once 'sql/flotas_editar.php';
             if ($nflota > 0){
         ?>
                 <h1><?php echo $h1; ?> <?php echo $flota['FLOTA'];?></h1>
+                <form name="formidioma" id="formidioma" method="post" action="flotas_editar.php">
+                    <input type="hidden" name="idflota" id="idflota" value="<?php echo $idflota;?>" />
+                </form>
                 <?php
                 if (isset($_POST['update'])){
                     if ($_POST['update'] == 'OK'){

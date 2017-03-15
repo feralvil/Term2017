@@ -44,12 +44,18 @@ require_once 'autenticacion.php';
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            <?php require_once 'cabecera.php'; ?>
+        </div>
         <?php
         if ($permiso > 1){
             require_once 'sql/flotas_contactos.php';
             if ($nflota > 0){
         ?>
                 <h1><?php echo $h1; ?> <?php echo $flota['FLOTA'];?></h1>
+                <form name="formidioma" id="formidioma" method="post" action="flotas_contactos.php">
+                    <input type="hidden" name="idflota" id="idflota" value="<?php echo $idflota;?>" />
+                </form>
                 <form name="flotasdetalle" id="flotasdetalle" action="flotas_detalle.php" method="post">
                     <input type="hidden" name="idflota" id="idflota" value="<?php echo $idflota;?>" />
                 </form>

@@ -101,4 +101,18 @@ $(function(){
    $("a#linkiraorg").click(function(){
        $("form#formorg").submit();
    });
+   //Cambio de idioma - VA:
+   $("a#valencia").click(function(){
+       // Modificamos la cookie de idioma:
+       document.cookie = "idioma=va";
+       $("form#actionflota").attr('action', 'flotas_detalle.php');
+       $("form#actionflota").submit();
+   });
+   //Cambio de idioma - ES:
+   $("a#castellano").click(function(){
+       // Modificamos la cookie de idioma:
+       document.cookie = "idioma=es";
+       $("form#actionflota").attr('action', 'flotas_detalle.php');
+       $("form#actionflota").submit();
+   });
 });

@@ -52,6 +52,9 @@ require_once 'autenticacion.php';
 </head>
 <body>
     <div class="container-fluid">
+        <div id="header" class="row">
+            <?php require_once 'cabecera.php'; ?>
+        </div>
         <?php
         if ($permiso > 0){
             require_once 'sql/flotas_detalle.php';
