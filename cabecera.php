@@ -80,11 +80,13 @@ $controlador = $cont[0];
                         }
                         ?>
                     </li>
+                    <!--
                     <li>
                         <a href="logout.php" title="<?php echo $txtlogout;?>" id="logout">
                             <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> <?php echo $txtlogout;?>
                         </a>
                     </li>
+                    -->
                 </ul>
             </div>
         </div>

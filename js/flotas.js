@@ -2,7 +2,6 @@
 Funciones Javascript para flotas.php
 */
 $(function(){
-
     // Cambio en el select de Flota:
     $("select").change(function(){
         $("input#inputpag").val(1);

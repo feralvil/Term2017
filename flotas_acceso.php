@@ -10,6 +10,7 @@ require_once 'conectabbdd.php';
 // Obtención del usuario
 require_once 'autenticacion.php';
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <title><?php echo $titulo; ?></title>
@@ -30,9 +31,7 @@ require_once 'autenticacion.php';
     $permiso = 0;
     if ($flota_usu == 0){
     ?>
-        <script type="text/javascript">
-            window.top.location.href = "https://intranet.comdes.gva.es/cvcomdes/";
-        </script>
+        <script type="text/javascript" src="js/reload.js"></script>
     <?php
     }
     else{
