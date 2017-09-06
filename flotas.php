@@ -3,10 +3,8 @@
 require_once 'idioma.php';
 $lang = "idioma/flotas_$idioma.php";
 require_once $lang;
-
 // Conexión a la BBDD:
 require_once 'conectabbdd.php';
-
 // Obtención del usuario
 require_once 'autenticacion.php';
 ?>
@@ -78,6 +76,24 @@ require_once 'autenticacion.php';
                                 ?>
                             </select>
                         </div>
+                        <label for="selcont" class="col-sm-2 control-label"><?php echo $txtambito;?></label>
+                        <div class="col-sm-2">
+                            <select name="ambito" id="selambito" class="form-control">
+                                <option value="">Seleccionar</option>
+                                <?php
+                                $ambitos = array(
+                                    'NADA' => $txtambnada, 'LOC' => $txtambloc, 'PROV' => $txtambprov, 'AUT' => $txtambaut
+                                );
+                                foreach ($ambitos as $idamb => $txtamb) {
+                                ?>
+                                    <option value="<?php echo $idamb;?>" <?php if ($_POST['ambito'] == $idamb) {echo "selected";} ?>>
+                                        <?php echo $txtamb;?>
+                                    </option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="selflota" class="col-sm-2 control-label">Flota</label>
@@ -111,74 +127,81 @@ require_once 'autenticacion.php';
                         echo $txtresult;
                         if ($nflotas > 0){
                             echo ' &mdash; ';
-                            echo sprintf($txtflotas, $inicio + 1, $inicio + $nflotas, $nsinpag);
+                            echo sprintf($txtnflotas, $inicio + 1, $inicio + $nflotas, $nsinpag);
                         }
                         ?>
                     </legend>
                     <div class="form-group">
-                        <label for="seltampag" class="col-sm-2 control-label"><?php echo $txttampag;?></label>
-                        <div class="col-sm-1">
-                            <select name="tampagina" id="seltampag" class="form-control">
+                        <?php
+                        if ($tampagina < $nsinpag){
+                        ?>
+                            <label for="seltampag" class="col-sm-2 control-label"><?php echo $txttampag;?></label>
+                            <div class="col-sm-1">
+                                <select name="tampagina" id="seltampag" class="form-control">
+                                    <?php
+                                    $tampag = array(30 => 30, 50 =>50, 100 => 100, $nsinpag => $txttodo);
+                                    foreach ($tampag as $indice => $valor) {
+                                    ?>
+                                        <option value="<?php echo $indice;?>" <?php if ($_POST['tampagina'] == $indice) {echo "selected";} ?>><?php echo $valor;?></option>
+                                    <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        <?php
+                        }
+                        if ($npaginas > 1){
+                        ?>
+                            <div class="text-center col-md-4 btn-group" aria-label="...">
                                 <?php
-                                $tampag = array(30 => 30, 50 =>50, 100 => 100, $nsinpag => $txttodo);
-                                foreach ($tampag as $indice => $valor) {
-                                ?>
-                                    <option value="<?php echo $indice;?>" <?php if ($_POST['tampagina'] == $indice) {echo "selected";} ?>><?php echo $valor;?></option>
-                                <?php
+                                $clase = "btn btn-default";
+                                if ($pagina == 1){
+                                 $clase .= " disabled";
                                 }
                                 ?>
-                            </select>
-                        </div>
-                        <div class="text-center col-md-4 btn-group" aria-label="...">
-                            <?php
-                            $clase = "btn btn-default";
-                            if ($pagina == 1){
-                             $clase .= " disabled";
-                            }
-                            ?>
-                            <button type="button" class="<?php echo $clase;?>" id="primera" title="<?php echo $txtpagpri;?>">
-                                 &nbsp; <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> &nbsp;
-                            </button>
-                            <?php
-                            $clase = "btn btn-default";
-                            if ($pagina == 1){
-                                $clase .= " disabled";
-                            }
-                            ?>
-                            <button type="button" class="<?php echo $clase;?>" id="anterior" title="<?php echo $txtpagant;?>">
-                                &nbsp; <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> &nbsp;
-                            </button>
-                            <?php
-                            $clase = "btn btn-default";
-                            ?>
-                            <button type="button" class="<?php echo $clase;?>" id="actual" title="<?php echo $txtpagact;?>">
-                                <?php echo $txtpagina . ' ' . $pagina . '/' . $npaginas; ?>
-                            </button>
-                            <?php
-                            $clase = "btn btn-default";
-                            if ($pagina == $npaginas){
-                                $clase .= " disabled";
-                            }
-                            ?>
-                            <button type="button" class="<?php echo $clase;?>" id="siguiente" title="<?php echo $txtpagsig;?>">
-                                &nbsp; <span class="glyphicon glyphicon-forward" aria-hidden="true"></span> &nbsp;
-                            </button>
-                            <?php
-                            $clase = "btn btn-default";
-                            if ($pagina == $npaginas){
-                                $clase .= " disabled";
-                            }
-                            ?>
-                            <button type="button" class="<?php echo $clase;?>" id="ultima" title="<?php echo $txtpagult;?>">
-                                &nbsp; <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span> &nbsp;
-                            </button>
-                        </div>
+                                <button type="button" class="<?php echo $clase;?>" id="primera" title="<?php echo $txtpagpri;?>">
+                                     &nbsp; <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> &nbsp;
+                                </button>
+                                <?php
+                                $clase = "btn btn-default";
+                                if ($pagina == 1){
+                                    $clase .= " disabled";
+                                }
+                                ?>
+                                <button type="button" class="<?php echo $clase;?>" id="anterior" title="<?php echo $txtpagant;?>">
+                                    &nbsp; <span class="glyphicon glyphicon-backward" aria-hidden="true"></span> &nbsp;
+                                </button>
+                                <?php
+                                $clase = "btn btn-default";
+                                ?>
+                                <button type="button" class="<?php echo $clase;?>" id="actual" title="<?php echo $txtpagact;?>">
+                                    <?php echo $txtpagina . ' ' . $pagina . '/' . $npaginas; ?>
+                                </button>
+                                <?php
+                                $clase = "btn btn-default";
+                                if ($pagina == $npaginas){
+                                    $clase .= " disabled";
+                                }
+                                ?>
+                                <button type="button" class="<?php echo $clase;?>" id="siguiente" title="<?php echo $txtpagsig;?>">
+                                    &nbsp; <span class="glyphicon glyphicon-forward" aria-hidden="true"></span> &nbsp;
+                                </button>
+                                <?php
+                                $clase = "btn btn-default";
+                                if ($pagina == $npaginas){
+                                    $clase .= " disabled";
+                                }
+                                ?>
+                                <button type="button" class="<?php echo $clase;?>" id="ultima" title="<?php echo $txtpagult;?>">
+                                    &nbsp; <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span> &nbsp;
+                                </button>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         <div class="btn-group col-md-4" role="group" aria-label="...">
                             <a href="flotas_agregar.php" title="<?php echo $txtaddflota;?>" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <?php echo $txtaddflo;?>
-                            </a>
-                            <a href="flotas.php" title="<?php echo $txtnewtab;?>" class="btn btn-default" target="_blank">
-                                <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> <?php echo $txtampliar;?>
                             </a>
                             <button type="button" class="btn btn-default" id="xlsflotas" title="<?php echo $txtexcel;?>">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Excel

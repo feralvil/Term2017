@@ -100,25 +100,44 @@ if ($permiso > 1){
     // Criterios de selección:
     $fila = 4;
     $ncrit = 0;
-    $colcrit = array('B', 'D', 'H');
-    $colfusion = array('C', 'F', 'L');
+    $ncol = 0;
+    $colcrit = array('B', 'F');
+    $colfusion = array('D', 'J');
     if ((isset($_POST['idorg']))&&($_POST['idorg'] > 0)){
-        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncrit] . $fila, $txtorg . ': ' . $selorg['ORGANIZACION']);
-        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncrit] . $fila)->applyFromArray($estiloCriterio);
-        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncrit] . $fila . ':' . $colfusion[$ncrit] . $fila);
+        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncol] . $fila, $txtorg . ': ' . $selorg['ORGANIZACION']);
+        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncol] . $fila)->applyFromArray($estiloCriterio);
+        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncol] . $fila . ':' . $colfusion[$ncol] . $fila);
         $ncrit++;
+        $ncol++;
     }
     if ($idflota > 0){
-        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncrit] . $fila, 'Flota: ' . $selflota['FLOTA']);
-        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncrit] . $fila)->applyFromArray($estiloCriterio);
-        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncrit] . $fila . ':' . $colfusion[$ncrit] . $fila);
+        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncol] . $fila, 'Flota: ' . $selflota['FLOTA']);
+        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncol] . $fila)->applyFromArray($estiloCriterio);
+        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncol] . $fila . ':' . $colfusion[$ncol] . $fila);
         $ncrit++;
+        $ncol++;
     }
     if ((isset($_POST['formcont']))&&($_POST['formcont'] != "")){
+        if ($ncrit > 1){
+            $ncol = 0;
+            $fila++;
+        }
         $valcont = array('SI' => 'Sí', 'NO' => 'NO');
-        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncrit] . $fila, $txtcontof . ': ' . $valcont[$_POST['formcont']]);
-        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncrit] . $fila)->applyFromArray($estiloCriterio);
-        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncrit] . $fila . ':' . $colfusion[$ncrit] . $fila);
+        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncol] . $fila, $txtcontof . ': ' . $valcont[$_POST['formcont']]);
+        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncol] . $fila)->applyFromArray($estiloCriterio);
+        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncol] . $fila . ':' . $colfusion[$ncol] . $fila);
+        $ncrit++;
+        $ncol++;
+    }
+    if ((isset($_POST['ambito']))&&($_POST['ambito'] != "")){
+        if ($ncrit > 1){
+            $ncol = 0;
+            $fila++;
+        }
+        $ambitos = array('NADA' => $txtambnada, 'LOC' => $txtambloc, 'PROV' => $txtambprov, 'AUT' => $txtambaut);
+        $objPHPExcel->getActiveSheet()->setCellValue($colcrit[$ncol] . $fila, $txtambito . ': ' . $ambitos[$_POST['ambito']]);
+        $objPHPExcel->getActiveSheet()->getStyle($colcrit[$ncol] . $fila)->applyFromArray($estiloCriterio);
+        $objPHPExcel->getActiveSheet()->mergeCells($colcrit[$ncol] . $fila . ':' . $colfusion[$ncol] . $fila);
         $ncrit++;
     }
     $fila = 3;
@@ -127,6 +146,9 @@ if ($permiso > 1){
         $objPHPExcel->getActiveSheet()->getStyle('A' . $fila)->applyFromArray($estiloCriterio);
         $objPHPExcel->getActiveSheet()->mergeCells('A' . $fila . ':' . 'E' . $fila);
         $fila = $fila + 3;
+        if ($ncrit > 2){
+            $fila++;
+        }
     }
 
     // Número de las Flotas:

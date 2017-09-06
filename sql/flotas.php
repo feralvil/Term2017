@@ -44,6 +44,9 @@ if ($idflota > 0){
 if ((isset($_POST['formcont']))&&($_POST['formcont'] != "")){
     $sql_flotas .=  " AND (flotas.FORMCONT = '" . $_POST['formcont'] ."')";
 }
+if ((isset($_POST['ambito']))&&($_POST['ambito'] != "")){
+    $sql_flotas .=  " AND (flotas.AMBITO = '" . $_POST['ambito'] ."')";
+}
 $sql_flotas .= " ORDER BY organizaciones.ORGANIZACION ASC, flotas.FLOTA ASC";
 $res_flotas = mysqli_query($link, $sql_flotas) or die($errsqlflotas . mysqli_error($link));
 $nsinpag = mysqli_num_rows($res_flotas);

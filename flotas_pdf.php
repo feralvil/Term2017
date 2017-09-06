@@ -128,6 +128,11 @@ if ($permiso > 1){
         $h3crit .= '<li><strong>' . $txtcontof . '</strong>: ' . $valcont[$_POST['formcont']] . '</li>';
         $ncrit++;
     }
+    if ((isset($_POST['ambito']))&&($_POST['ambito'] != "")){
+        $ambitos = array('NADA' => $txtambnada, 'LOC' => $txtambloc, 'PROV' => $txtambprov, 'AUT' => $txtambaut);
+        $h3crit .= '<li><strong>' . $txtambito . '</strong>: ' . $ambitos[$_POST['ambito']] . '</li>';
+        $ncrit++;
+    }
     $h3crit .= '</ul>';
     if ($ncrit > 0){
         $pdf->writeHTML($h3crit, true, true, true, false, '');
