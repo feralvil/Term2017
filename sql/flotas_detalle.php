@@ -10,7 +10,7 @@ $nselflotas = mysqli_num_rows($res_selflotas);
 // Construimos el Select de Flotas:
 $selflotas = array();
 while ($flotasel = mysqli_fetch_assoc($res_selflotas)){
-    $selflotas[] = array('ID' => $flotasel['ID'], 'FLOTA' => $flotasel['FLOTA']);
+    $selflotas[$flotasel['ID']] = $flotasel['FLOTA'];
 }
 mysqli_free_result($res_selflotas);
 

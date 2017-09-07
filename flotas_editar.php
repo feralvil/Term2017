@@ -54,7 +54,7 @@ require_once 'autenticacion.php';
             <?php require_once 'cabecera.php'; ?>
         </div>
         <?php
-        if ($permiso > 0){
+        if ($permiso > 1){
             require_once 'sql/flotas_editar.php';
             if ($nflota > 0){
         ?>
@@ -96,10 +96,18 @@ require_once 'autenticacion.php';
                             <input type="text" name="acronimo" class="form-control" id="inputacro" required value="<?php echo $flota['ACRONIMO']; ?>">
                         </div>
                         <div class="form-group col-md-2">
-                            <label for="inputactiva"><?php echo $txtactiva; ?></label>
-                            <select name="activo" id="inputactiva" class="form-control">
-                                <option value="NO" <?php if ($flota['ACTIVO'] == 'NO'){ echo "selected";}?>>No</option>
-                                <option value="SI" <?php if ($flota['ACTIVO'] == 'SI'){ echo "selected";}?>>Sí</option>
+                            <label for="inputambito"><?php echo $thambito; ?></label>
+                            <select name="ambito" id="inputambito" class="form-control">
+                                <?php
+                                $ambitos = array('NADA' => $txtambnada, 'LOC' => $txtambloc, 'PROV' => $txtambprov, 'AUT' => $txtambaut);
+                                foreach ($ambitos as $idamb => $txtamb) {
+                                ?>
+                                    <option value="<?php echo $idamb;?>" <?php if ($flota['AMBITO'] == $idamb){ echo "selected";}?>>
+                                        <?php echo $txtamb;?>
+                                    </option>
+                                <?php
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
@@ -124,10 +132,10 @@ require_once 'autenticacion.php';
                             <label for="inputciudad"><?php echo $txtciudad; ?></label>
                             <select name="ciudad" id="inputciudad" class="form-control">
                                 <?php
-                                foreach ($selmuni as $munisel) {
+                                foreach ($selmuni as $muni_id => $muni_nom) {
                                 ?>
-                                    <option value="<?php echo $munisel['INE'];?>" <?php if ($flota['INE'] == $munisel['INE']) {echo "selected";} ?>>
-                                        <?php echo $munisel['MUNICIPIO'];?>
+                                    <option value="<?php echo $muni_id;?>" <?php if ($flota['INE'] == $muni_id) {echo "selected";} ?>>
+                                        <?php echo $muni_nom;?>
                                     </option>
                                 <?php
                                 }
@@ -143,10 +151,10 @@ require_once 'autenticacion.php';
                                 <div class="form-group">
                                     <select name="organiza" id="inputorg" class="form-control">
                                         <?php
-                                        foreach ($selorg as $orgsel) {
+                                        foreach ($selorg as $org_id => $org_nom) {
                                         ?>
-                                            <option value="<?php echo $orgsel['ID'];?>" <?php if ($flota['ORGANIZACION'] == $orgsel['ID']) {echo "selected";} ?>>
-                                                <?php echo $orgsel['ORGANIZACION'];?>
+                                            <option value="<?php echo $org_id;?>" <?php if ($flota['ORGANIZACION'] == $org_id) {echo "selected";} ?>>
+                                                <?php echo $org_nom;?>
                                             </option>
                                         <?php
                                         }
@@ -177,10 +185,7 @@ require_once 'autenticacion.php';
                                 </div>
                             </fieldset>
                         </div>
-
                     </div>
-
-
                     <div class="form-group text-center">
                         <div class="btn-group" role="group" aria-label="...">
                             <button type="button" class="btn btn-default" id="botatras" title="<?php echo $botatras;?>">

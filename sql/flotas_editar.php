@@ -32,7 +32,7 @@ if ($nflota > 0){
     // Construimos el Select de Municipios:
     $selmuni = array();
     while ($munisel = mysqli_fetch_assoc($res_selmuni)){
-        $selmuni[] = array('INE' => $munisel['INE'], 'MUNICIPIO' => $munisel['MUNICIPIO']);
+        $selmuni[$munisel['INE']] = $munisel['MUNICIPIO'];
     }
     mysqli_free_result($res_selmuni);
     // Select de Organizaciones
@@ -42,7 +42,7 @@ if ($nflota > 0){
     // Construimos el Select de Organizaciones:
     $selorg = array();
     while ($orgsel = mysqli_fetch_assoc($res_selorg)){
-        $selorg[] = array('ID' => $orgsel['ID'], 'ORGANIZACION' => $orgsel['ORGANIZACION']);
+        $selorg[$orgsel['ID']] = $orgsel['ORGANIZACION'];
     }
     mysqli_free_result($res_selorg);
 }

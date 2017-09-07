@@ -59,7 +59,12 @@ require_once 'autenticacion.php';
             <input name="mensflash" type="hidden" value="<?php echo $mensflash;?>">
         </form>
         <!-- Funciones jQuery -->
-        <script type="text/javascript" src="js/flotas_update.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                // Envíar formulario
+                $("form#formupdate").submit();
+            });
+        </script>
          <noscript>
              <input type="submit" value="verify submit">
          </noscript>

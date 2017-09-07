@@ -1,5 +1,5 @@
 /*
-Funciones Javascript para flotas_acceso.php
+Funciones Javascript para flotas_editar.php
 */
 
 $(function(){

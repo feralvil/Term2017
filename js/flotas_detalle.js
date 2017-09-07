@@ -31,14 +31,6 @@ $(function(){
        $("form#actionflota").attr('target', '_self');
        $("form#actionflota").attr('action', 'flotas.php');
    });
-   // Botón Nueva Pestaña:
-   $("button#botnewtab").click(function(){
-       $("form#actionflota").attr('action', 'flotas_detalle.php');
-       $("form#actionflota").attr('target', '_blank');
-       $("form#actionflota").submit();
-       $("form#actionflota").attr('target', '_self');
-       $("form#actionflota").attr('action', 'flotas.php');
-   });
    // Botón acceso:
    $("button#botacceso").click(function(){
        $("form#actionflota").attr('action', 'flotas_acceso.php');

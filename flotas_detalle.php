@@ -67,10 +67,10 @@ require_once 'autenticacion.php';
                             <div class="col-sm-3">
                                 <select name="idflota" id="selflota" class="form-control">
                                     <?php
-                                    foreach ($selflotas as $flotasel) {
+                                    foreach ($selflotas as $flota_id => $flota_nom) {
                                     ?>
-                                        <option value="<?php echo $flotasel['ID'];?>" <?php if ($_POST['idflota'] == $flotasel['ID']) {echo "selected";} ?>>
-                                            <?php echo $flotasel['FLOTA'];?>
+                                        <option value="<?php echo $flota_id;?>" <?php if ($_POST['idflota'] == $flota_id) {echo "selected";} ?>>
+                                            <?php echo $flota_nom;?>
                                         </option>
                                     <?php
                                     }
@@ -90,9 +90,6 @@ require_once 'autenticacion.php';
                             <?php
                             }
                             ?>
-                            <button type="button" class="btn btn-default" id="botnewtab" title="<?php echo $txtnewtab;?>">
-                                <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span> <?php echo $txtnewtab;?>
-                            </button>
                             <button type="button" class="btn btn-default" id="botexcel" title="<?php echo $txtexcel;?>">
                                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> <?php echo $txtexcel;?>
                             </button>
@@ -156,14 +153,19 @@ require_once 'autenticacion.php';
                                 <th>Flota</th>
                                 <th><?php echo $thacronimo;?></th>
                                 <th><?php echo $thusuario;?></th>
-                                <th><?php echo $thactiva;?></th>
+                                <th><?php echo $thambito;?></th>
                                 <th><?php echo $thencripta;?></th>
                             </tr>
                             <tr>
                                 <td><?php echo $flota['FLOTA'];?></td>
                                 <td><?php echo $flota['ACRONIMO'];?></td>
                                 <td><?php echo $flota['LOGIN'];?></td>
-                                <td><?php echo $flota['ACTIVO'];?></td>
+                                <td>
+                                    <?php
+                                    $ambitos = array('NADA' => $txtambnada, 'LOC' => $txtambloc, 'PROV' => $txtambprov, 'AUT' => $txtambaut);
+                                    echo $ambitos[$flota['AMBITO']];
+                                    ?>
+                                </td>
                                 <td><?php echo $flota['ENCRIPTACION'];?></td>
                             </tr>
                         </table>
